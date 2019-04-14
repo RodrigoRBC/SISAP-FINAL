@@ -6046,7 +6046,7 @@ CREATE TABLE IF NOT EXISTS `secpeople` (
 --
 
 INSERT INTO `secpeople` (`id`, `firstname`, `appaterno`, `apmaterno`, `privelege`, `username`, `language`, `status`, `creationdate`, `expirationdate`, `password`, `email`, `planificar`, `generated`, `secproject_id`, `regimen`) VALUES
-(1, 'admin', 'admin', 'admin', 1, 'admin', 'spa', 'AC', NULL, NULL, '52640890442556b8b157153eb26cfce0564422aa', 'aduran@chiusac.com', 0, 0, NULL, '');
+(1, 'admin', 'admin', 'admin', 1, 'admin', 'spa', 'AC', NULL, NULL, '71a1d9b79c292cf9a4bc74083f6c33378a511b10', 'aduran@chiusac.com', 0, 0, NULL, '');
 
 -- --------------------------------------------------------
 
