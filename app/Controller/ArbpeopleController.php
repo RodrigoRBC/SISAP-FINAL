@@ -27,7 +27,7 @@ class ArbpeopleController extends AppController {
 
 	public function index($paginador=null) {
 
-		$this->Arbrate->recursive = 0;
+		$this->Arbperson->recursive = 0;
 		$this->set('arbpeoplepublics', $this->Paginator->paginate());
 
 		if(!empty($this->request->params['named']['page'])){

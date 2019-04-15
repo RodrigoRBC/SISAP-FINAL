@@ -1,0 +1,26 @@
+ El volumen de la unidad C no tiene etiqueta.
+ El n£mero de serie del volumen es: 462C-DEB3
+
+ Directorio de C:\wamp64\www\SISAP-FINAL\app\Controller
+
+15/04/2019  00:36    <DIR>          .
+15/04/2019  00:36    <DIR>          ..
+14/04/2019  22:54             5,213 AcosController.php
+14/04/2019  22:54             7,655 AppController.php
+15/04/2019  00:27             5,300 ArbpeopleArbratesController.php
+15/04/2019  00:25             4,884 ArbpeopleController.php
+15/04/2019  00:24             4,666 ArbratesController.php
+15/04/2019  00:23             4,549 ArbubigeosController.php
+14/04/2019  22:54    <DIR>          Component
+15/04/2019  00:36                 0 controladores.txt
+14/04/2019  22:54             2,163 PagesController.php
+14/04/2019  22:54             6,674 SecaccessesController.php
+14/04/2019  22:54            44,790 SecassignsController.php
+14/04/2019  22:54               813 SecconfigurationsController.php
+14/04/2019  22:54             6,777 SecorganizationsController.php
+14/04/2019  22:54            26,721 SecpeopleController.php
+14/04/2019  22:54             5,610 SecprogramsController.php
+14/04/2019  22:54            12,343 SecprojectsController.php
+14/04/2019  22:54             5,122 SecrolesController.php
+              16 archivos        143,280 bytes
+               3 dirs  939,105,955,840 bytes libres
