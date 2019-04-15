@@ -1,58 +1,47 @@
-<div class="arbrates index">
-	<h2><?php echo __('Arbrates'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('total_cost'); ?></th>
-			<th><?php echo $this->Paginator->sort('number_of_inhabitants'); ?></th>
-			<th><?php echo $this->Paginator->sort('year_and_month'); ?></th>
-			<th><?php echo $this->Paginator->sort('monthly_rate'); ?></th>
-			<th><?php echo $this->Paginator->sort('status'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($arbrates as $arbrate): ?>
-	<tr>
-		<td><?php echo h($arbrate['Arbrate']['id']); ?>&nbsp;</td>
-		<td><?php echo h($arbrate['Arbrate']['total_cost']); ?>&nbsp;</td>
-		<td><?php echo h($arbrate['Arbrate']['number_of_inhabitants']); ?>&nbsp;</td>
-		<td><?php echo h($arbrate['Arbrate']['year_and_month']); ?>&nbsp;</td>
-		<td><?php echo h($arbrate['Arbrate']['monthly_rate']); ?>&nbsp;</td>
-		<td><?php echo h($arbrate['Arbrate']['status']); ?>&nbsp;</td>
-		<td><?php echo h($arbrate['Arbrate']['created']); ?>&nbsp;</td>
-		<td><?php echo h($arbrate['Arbrate']['modified']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $arbrate['Arbrate']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $arbrate['Arbrate']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $arbrate['Arbrate']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $arbrate['Arbrate']['id']))); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
+<?php echo $this->Session->flash();?>
+<div class="row">
+	<div class="col s12 m12 112">
+		<h4 class="header2"><?php echo (__('Lista de Tasas',true));?></h4>
+		<?php echo $this->Element('agregar'); ?>
+		<?php echo $this->Element('buscador', array('elementos'=>$elementos,'url' => 'index')); ?>
+		<table class="striped">
+			<thead>
+				<tr>
+					<th><?php echo $this->Paginator->sort('Arbrate.id',__('IDENTIFICADOR', true)); ?></th>
+					<th><?php echo $this->Paginator->sort('Arbrate.total_cost',__('COSTO TOTAL', true)); ?></th>
+					<th><?php echo $this->Paginator->sort('Arbrate.number_of_inhabitants',__('N.° HABITANTES', true)); ?></th>
+					<th><?php echo $this->Paginator->sort('Arbrate.year_and_month',__('AÑO Y MES', true)); ?></th>
+					<th><?php echo $this->Paginator->sort('Arbrate.monthly_rate',__('TASA MENSUAL', true)); ?></th>
+					<th><?php echo $this->Paginator->sort('Arbrate.status',__('ESTADO', true)); ?></th>
+					<th><?php echo $this->Paginator->sort('Arbrate.created',__('FECHA CREADO', true)); ?></th>
+					<th><?php echo $this->Paginator->sort('Arbrate.modified',__('FECHA MODIFICADO', true)); ?></th>
+					<th class="actions"><?php echo __('ACCIONES',true); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($arbrates as $arbrate): ?>
+				<tr>
+					<td><?php echo h($arbrate['Arbrate']['id']); ?>&nbsp;</td>
+					<td><?php echo h($arbrate['Arbrate']['total_cost']); ?>&nbsp;</td>
+					<td><?php echo h($arbrate['Arbrate']['number_of_inhabitants']); ?>&nbsp;</td>
+					<td><?php echo h($arbrate['Arbrate']['year_and_month']); ?>&nbsp;</td>
+					<td><?php echo h($arbrate['Arbrate']['monthly_rate']); ?>&nbsp;</td>
+					<td><?php echo h($arbrate['Arbrate']['status']); ?>&nbsp;</td>
+					<td><?php echo h($arbrate['Arbrate']['created']); ?>&nbsp;</td>
+					<td><?php echo h($arbrate['Arbrate']['modified']); ?>&nbsp;</td>
+					<td class="actions" style="width: 100px">
+						<?php
+							$id = $arbrate['Arbrate']['id'];
+							$name = $arbrate['Arbrate']['year_and_month'];
+							$status = $arbrate['Arbrate']['status'];
+
+							echo $this->element('action', array('id'=>$id, 'name'=>$name,'estado'=>$status));
+						?>
+						</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php echo $this->element('paginador'); ?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Arbrate'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Arbpeople'), array('controller' => 'arbpeople', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Arbperson'), array('controller' => 'arbpeople', 'action' => 'add')); ?> </li>
-	</ul>
 </div>
