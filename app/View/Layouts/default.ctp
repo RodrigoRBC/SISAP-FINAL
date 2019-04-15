@@ -136,13 +136,13 @@
     <!-- END MAIN -->
 
     <!-- START FOOTER -->
-    <footer class="page-footer light-blue darken">
+<footer class="page-footer light-blue darken">
         <div class="container">
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Copyright © 2018 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">DCA UNHEVAL</a> All rights reserved.
-                <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://www.facebook.com/miguel.chiu.veramendi">Miguel Chiuyari</a></span>
+                Copyright © 2019 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">Municipalidad de Obas</a> All rights reserved.
+                <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://www.facebook.com/miguel.chiu.veramendi">GoPixelABC</a></span>
             </div>
         </div>
     </footer>
