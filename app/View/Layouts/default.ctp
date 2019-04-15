@@ -53,12 +53,12 @@
             <nav class="navbar-color">
                 <div class="nav-wrapper light-blue darken">
                     <ul class="left">                      
-                      <li><h1 class="logo-wrapper"><?php echo $this->Html->link($this->Html->image('logo-calidad.png',array('alt'=>'materialize logo')), '/pages/home', array('class' => 'brand-logo darken-1','escape'=>false)); ?>
+                      <li><h1 class="logo-wrapper"><?php echo $this->Html->link($this->Html->image('LOGO_OBAS_HO_P.png',array('alt'=>'materialize logo')), '/pages/home', array('class' => 'brand-logo darken-1','escape'=>false)); ?>
             			     <span class="logo-text"></span></h1></li>
                     </ul>
                     <div class="header-search-wrapper hide-on-med-and-down">
                         <i class="mdi-action-search"></i>
-                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Sistema de Círculos de Mejora Continua (SCMC) DE LA <?php echo $datosLogeo['0']['Secproject']['name'];?>"/>
+                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Sistema de Arbitrios DE LA <?php echo $datosLogeo['0']['Secproject']['name'];?>"/>
                     </div>
                 </div>
             </nav>

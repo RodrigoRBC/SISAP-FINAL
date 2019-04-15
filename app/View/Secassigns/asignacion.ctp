@@ -37,7 +37,7 @@ echo $this->Html->script('jquery.min.js');?>
 		<?php echo $this->Form->hidden('Secperson.password'); ?>
         <div class="row">
           <div class="input-field col s12 center">
-            <?php echo $this->Html->image('DCA.jpg',array('class'=>'circle responsive-img valign profile-image-login')); ?>
+            <?php echo $this->Html->image('LOGO_OBAS.png',array('class'=>'circle responsive-img valign profile-image-login')); ?>
             <p class="center login-form-text">Asignación</p>
           </div>
         </div>
@@ -45,7 +45,7 @@ echo $this->Html->script('jquery.min.js');?>
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
   				<?php echo $this->Form->select('Secorganization.id',array($secorganizations),array('class'=>'ui compact selection dropdown','style' => 'width: 300px','label'=>false,'escape'=>false,'empty'=>false));?>
-            <label for="SecorganizationId" class="center-align">Facultad</label>
+            <label for="SecorganizationId" class="center-align">Municipalidad</label>
           </div>
         </div>
         <div class="row margin">
@@ -54,7 +54,7 @@ echo $this->Html->script('jquery.min.js');?>
 	  			<select name="data[Secassign][secproject_id]" id='SecassignSecprojectId' 
 	  				style='width:300px;'>
 	  			</select>
-            <label for="SecassignSecprojectId">Escuela Profesional</label>
+            <label for="SecassignSecprojectId">Centro Poblado</label>
           </div>
         </div>
         <div class="row margin">
