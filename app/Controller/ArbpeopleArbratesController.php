@@ -105,9 +105,14 @@ class ArbpeopleArbratesController extends AppController {
 				$this->Flash->error(__('El pago de la tasa de arbitrio de la persona no pudo ser guardado. Inténtalo de nuevo.'));
 			}
 		}
-		$arbpeople = $this->ArbpeopleArbrate->Arbperson->find('list');
-		$arbrates = $this->ArbpeopleArbrate->Arbrate->find('list');
-		$this->set(compact('arbpeople', 'arbrates'));
+		$arbrates = $this->ArbpeopleArbrate->Arbrate->find('list',
+																															array(
+																																'fields' => array('Arbrate.id','Arbrate.year_and_month'),
+																																'conditions' => array('Arbrate.status' => 'AC'),
+																																'recursive' => 0
+																															)
+	);
+		$this->set(compact('arbrates'));
 	}
 
 /**
@@ -157,4 +162,66 @@ class ArbpeopleArbratesController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	public function json_search() {
+		if ($this->request->is('ajax')){
+			$response = array();
+			$data = array();
+			$arbpeople = $this->ArbpeopleArbrate->Arbperson->find(
+				'all', array(
+					'fields' => array('Arbperson.id','Arbperson.names','Arbperson.first_surname','Arbperson.second_surname'),
+					'conditions' => array('Arbperson.status' => 'AC','Arbperson.dni' => $this->request->data['ArbpeopleArbrate']['dni']),
+					'recursive' => 0
+				)
+			);
+			foreach ($arbpeople as $arbperson) {
+				$data['id'] = $arbperson['Arbperson']['id'];
+				$data['name'] = $arbperson['Arbperson']['first_surname'].' '.$arbperson['Arbperson']['second_surname'].', '.$arbperson['Arbperson']['names'];
+			}
+			if (empty($arbpeople)) {
+				$response = array(
+					'message' =>'N.° D.N.I. no existe',
+					'data' => array()
+				);
+			} else {
+				$response = array(
+					'message' =>'Selecione la Tasa',
+					'data' => $data
+				);
+			}
+			$this->set(compact('response'));
+			$this->render('json_search', 'ajax');
+		}
+	}
+
+	public function json_rate() {
+		if ($this->request->is('ajax')){
+			$response = array();
+			$data = array();
+			$arbrates = $this->ArbpeopleArbrate->Arbrate->find('all',
+																																array(
+																																	'fields' => array('Arbrate.id','Arbrate.monthly_rate'),
+																																	'conditions' => array('Arbrate.status' => 'AC','Arbrate.id' => $this->request->data['ArbpeopleArbrate']['arbrate_id']),
+																																	'recursive' => 0));
+		foreach ($arbrates as $arbrate) {
+		$data['id'] = $arbrate['Arbrate']['id'];
+		$data['name'] = $arbrate['Arbrate']['monthly_rate'];
+		}
+
+			if (empty($arbrates)) {
+				$response = array(
+					'message' =>'Tasa no existe',
+					'data' => array()
+				);
+			} else {
+				$response = array(
+					'message' =>'Selecione la Tasa',
+					'data' => $data
+				);
+			}
+			$this->set(compact('response'));
+			$this->render('json_rate', 'ajax');
+		}
+	}
+
 }

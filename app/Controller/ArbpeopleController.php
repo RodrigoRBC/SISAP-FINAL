@@ -14,7 +14,7 @@ class ArbpeopleController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
-
+	public $helpers = array('PDF');
 /**
  * index method
  *
@@ -157,4 +157,94 @@ class ArbpeopleController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	public function generate_payment_report($id = null) {
+		$this->layout='pdf';
+		if (!$this->Arbperson->exists($id)) {
+			throw new NotFoundException(__('Indentificador InvĂˇlido'));
+		} else {
+				$arbperson = array();
+				$arbpeopleArbrates = array();
+				$arbrates = array();
+				$report_data = array();
+				$arbperson = $this->Arbperson->find('first',
+					array(
+						'conditions' => array(
+							'Arbperson.'. $this->Arbperson->primaryKey => $id),
+						'fields' => array(
+							'Arbperson.id',
+							'Arbperson.arbubigeo_id',
+							'Arbperson.dni',
+							'Arbperson.names',
+							'Arbperson.first_surname',
+							'Arbperson.second_surname',
+							'Arbperson.status'
+						),
+						'order' => 'Arbperson.first_surname asc',
+						'recursive' => 0
+						));
+				$arbpersonId = $arbperson['Arbperson']['id'];
+
+				$arbpeopleArbrates = $this->Arbperson->ArbpeopleArbrate->find('all',
+					array(
+						'conditions' => array(
+							'ArbpeopleArbrate.arbperson_id'=> $arbpersonId),
+						'fields' => array(
+							'ArbpeopleArbrate.arbperson_id',
+							'ArbpeopleArbrate.arbrate_id',
+							'ArbpeopleArbrate.arbitration_rate',
+							'ArbpeopleArbrate.payment_status',
+							'ArbpeopleArbrate.payment_date',
+							'ArbpeopleArbrate.document',
+							'ArbpeopleArbrate.status',
+							//'Arbrate.id',
+						//	'Arbrate.year_and_month'
+						),
+						'order' => 'Arbrate.year_and_month asc',
+						'recursive' => 0
+						));
+
+					$arbrates = $this->Arbperson->ArbpeopleArbrate->Arbrate->find('all', array(
+							'conditions' => array('Arbrate.status'=> 'AC'),
+							'fields' => array(
+								'Arbrate.id',
+								'Arbrate.year_and_month'
+							),
+							'order' => 'Arbrate.id asc',
+							'recursive' => 1
+					));
+
+					$existsdata = 0;
+					foreach ($arbrates as $keyarbrate => $valuearbrate) {
+						foreach ($arbpeopleArbrates as $keyarbpeopleArbrate => $valuearbpeopleArbrate) {
+							if ($valuearbpeopleArbrate['ArbpeopleArbrate']['arbrate_id'] == $valuearbrate['Arbrate']['id']) {
+								$report_data[$keyarbrate] = $valuearbpeopleArbrate;
+								$existsdata = 1;
+							}
+						}
+						if ($existsdata == 1) {
+							$existsdata = 0;
+						}else {
+							$report_data[$keyarbrate] = array(
+								'ArbpeopleArbrate' => array(
+									'arbperson_id' => '',
+									'arbrate_id' => '',
+									'arbitration_rate' => '',
+									'payment_status' => 'PENDIENTE',
+									'payment_date' => '',
+									'document' => '',
+									'status' => ''
+								),
+								'Arbrate' => array(
+									'id' => $valuearbrate['Arbrate']['id'],
+									'year_and_month' => $valuearbrate['Arbrate']['year_and_month']
+								)
+							);
+						}
+					}
+
+				$this->set(compact('arbperson', 'arbpeopleArbrates','arbrates', 'report_data'));
+		}
+}
+
 }
