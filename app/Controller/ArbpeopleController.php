@@ -14,7 +14,7 @@ class ArbpeopleController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
-
+	public $helpers = array('PDF');
 /**
  * index method
  *
